@@ -163,10 +163,13 @@ pub/media/
 pub/static/
 generated/
 
-# Dropins build artifacts
-scripts/__dropins__/**/*.map
-scripts/__dropins__/**/dist/
-scripts/__dropins__/**/build/
+# Dropins build artifacts and generated files - ENTIRE DROPINS DIRECTORY
+scripts/__dropins__/
+
+# Adobe Commerce generated files
+scripts/acdl/adobe-client-data-layer.min.js
+scripts/commerce-events-collector.js
+scripts/commerce-events-sdk.js
 
 # Local development files
 *.local
