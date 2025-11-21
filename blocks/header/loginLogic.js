@@ -23,11 +23,10 @@ function renderSignIn(element) {
     onSuccessCallback: () => {},
     formSize: 'small',
     routeForgotPassword: () => rootLink(CUSTOMER_FORGOTPASSWORD_PATH),
-    
   })(element);
 }
 
-export function renderAuthDropdown(navTools) {
+export function loginLogic(navTools) {
   const dropdownElement = document.createRange().createContextualFragment(`
  <div class="dropdown-wrapper nav-tools-wrapper">
     <button type="button" class="nav-dropdown-button" aria-haspopup="dialog" aria-expanded="false" aria-controls="login-modal"></button>

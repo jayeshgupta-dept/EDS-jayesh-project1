@@ -1,0 +1,7 @@
+.design-block-container {
+    display: flex;
+}
+
+ .design-block-container> .default-content-wrapper>p:nth-child(2){
+    background-color: red;
+}

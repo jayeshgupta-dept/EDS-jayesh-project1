@@ -80,23 +80,25 @@ const signUpFormConfig = {
         },
         slots: {
           SuccessNotificationActions: (innerCtx) => {
+            /* ---------------------------
+               EXISTING PRIMARY BUTTON
+            ----------------------------*/
             const primaryBtn = document.createElement('div');
-
             UI.render(Button, {
               children: 'Sign in',
-
               onClick: () => {
                 window.location.href = rootLink(CUSTOMER_LOGIN_PATH);
               },
             })(primaryBtn);
-
             innerCtx.appendChild(primaryBtn);
 
+            /* ---------------------------
+               EXISTING SECONDARY BUTTON
+            ----------------------------*/
             const secondaryButton = document.createElement('div');
             secondaryButton.style.display = 'flex';
             secondaryButton.style.justifyContent = 'center';
             secondaryButton.style.marginTop = 'var(--spacing-xsmall)';
-
             UI.render(Button, {
               children: 'Home',
               variant: 'tertiary',
@@ -104,8 +106,26 @@ const signUpFormConfig = {
                 window.location.href = rootLink('/');
               },
             })(secondaryButton);
-
             innerCtx.appendChild(secondaryButton);
+
+            /* ---------------------------
+              NEW MICROSOFT SIGN-IN BUTTON
+            ----------------------------*/
+            const microsoftButton = document.createElement('div');
+            microsoftButton.style.display = 'flex';
+            microsoftButton.style.justifyContent = 'center';
+            microsoftButton.style.marginTop = 'var(--spacing-xsmall)';
+
+            UI.render(Button, {
+              children: 'Sign in with Microsoft',
+              variant: 'secondary',      // or "primary", your choice
+              onClick: () => {
+                // TODO: Replace with your Microsoft OAuth URL
+                window.location.href = '/auth/microsoft/login';
+              },
+            })(microsoftButton);
+
+            innerCtx.appendChild(microsoftButton);
           },
         },
       })(elem);

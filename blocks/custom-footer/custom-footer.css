@@ -1,0 +1,274 @@
+/* Custom Footer Styles - Converted from React CSS */
+
+.custom-footer {
+  width: 100%;
+  background-color: var(--footer-bg-color, #333);
+  color: var(--footer-text-color, white);
+}
+
+.footer-screen-container {
+  width: 100%;
+  padding: 40px 0 20px;
+}
+
+.footer-inner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Desktop/Tablet Layout */
+.upper-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.left-container {
+  flex: 0 0 auto;
+}
+
+.footer-logo-link {
+  display: block;
+  text-decoration: none;
+}
+
+.footer-logo {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-navbar-list {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-list {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.navbar-list li {
+  margin: 0;
+}
+
+.navbar-list a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.navbar-list a:hover {
+  color: var(--footer-link-hover-color);
+}
+
+/* Lower Container */
+.lower-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--footer-border-color);
+  padding-top: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.lower-left-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.copyrights-container p {
+  margin: 0;
+  color: var(--footer-link-color);
+  font-size: 14px;
+}
+
+.terms-condition-container ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.terms-condition-container a {
+  color: var(--footer-link-color);
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.terms-condition-container a:hover {
+  color: var(--footer-link-hover-color);
+}
+
+/* Social Icons */
+.social-icons-container {
+  flex: 0 0 auto;
+}
+
+.social-icons-list {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.social-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--footer-social-bg);
+  border-radius: 50%;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.social-icon-link:hover {
+  background-color: var(--footer-social-hover-bg);
+  transform: translateY(-2px);
+}
+
+.social-icon-link .icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Mobile Layout - Hidden by default */
+.mobile-container {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.mobile-footer-logo-container .footer-logo {
+  height: 50px;
+}
+
+.mobile-social-icons-container .social-icons-list {
+  justify-content: center;
+}
+
+.mobile-terms-condition-container ul {
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-copyrights-container p {
+  margin: 0;
+  color: var(--footer-link-color);
+  font-size: 12px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .upper-container,
+  .lower-container {
+    display: none;
+  }
+
+  .mobile-container {
+    display: flex;
+  }
+
+  .footer-inner-container {
+    padding: 0 15px;
+  }
+
+  .footer-screen-container {
+    padding: 30px 0 15px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .upper-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .footer-navbar-list {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .navbar-list {
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .lower-container {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .terms-condition-container ul {
+    justify-content: center;
+  }
+}
+
+/* Icon Adjustments */
+.custom-footer .icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Color Variables */
+.custom-footer {
+  --footer-bg-color: #2d3142;
+  --footer-text-color: #ffffff;
+  --footer-link-color: rgba(255, 255, 255, 0.8);
+  --footer-link-hover-color: #ffffff;
+  --footer-border-color: rgba(255, 255, 255, 0.2);
+  --footer-social-bg: rgba(255, 255, 255, 0.1);
+  --footer-social-hover-bg: #666;
+}
+
+/* Light theme override if needed */
+.light-theme .custom-footer {
+  --color-primary: #f8f9fa;
+  --color-secondary: #6c757d;
+  color: #333;
+}
+
+.light-theme .custom-footer .navbar-list a,
+.light-theme .custom-footer .terms-condition-container a {
+  color: #333;
+}
+
+.light-theme .custom-footer .navbar-list a:hover,
+.light-theme .custom-footer .terms-condition-container a:hover {
+  color: #007bff;
+}
+
+.light-theme .custom-footer .copyrights-container p,
+.light-theme .custom-footer .mobile-copyrights-container p {
+  color: rgba(0, 0, 0, 0.6);
+}
+
