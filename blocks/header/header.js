@@ -855,7 +855,7 @@ export default async function decorate(block) {
         };
 
         console.log("✅ Microsoft Login success:", userInfo);
-
+        alert(`Welcome, ${userInfo}! You have successfully logged in.`);
         // Store user info in localStorage for persistence
         localStorage.setItem('ms_user_info', JSON.stringify({
           firstName: claims.given_name,
