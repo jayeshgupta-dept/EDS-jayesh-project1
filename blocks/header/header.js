@@ -4,6 +4,7 @@ import { getMetadata } from '../../scripts/aem.js';
 const isDesktop = window.matchMedia('(min-width: 900px)');
 import createModal from '../modal/modal.js';
 import { checkPincode } from '../location-modal/postload.js';
+import { createCustomer, generateCustomerToken } from './customerToken.js';
 
 // const overlay = document.createElement('div');
 // overlay.classList.add('overlay');
@@ -1105,6 +1106,64 @@ export default async function decorate(block) {
       return null;
     }
   }
+
+  const request = {
+    firstname: "Jayesh",
+    lastname: "Gupta",
+    email: "aditi@example.com",
+    password: "StrongPassword@123",
+    is_subscribed: true
+  }
+
+  // createCustomer({});
+  const response = await createCustomer({
+    firstname: request.firstname,
+    lastname: request.lastname,
+    email: request.email,
+    password: request.password,
+    is_subscribed: request.is_subscribed
+  });
+  const token = await generateCustomerToken({
+    email: request.email,
+    password: request.password
+  });
+  console.log("::::::::::::::::::::;", response);
+
+  console.log("Customer Token-----------------:", token.token);
+
+
+
+  // code for eds sso 
+
+  async function commerceQuery(query, variables) {
+    const meshEndpoint = 'https://edge-sandbox-graph.adobe.io/api/d79af252-509e-4a97-b99c-824f0a08c271/graphql';
+    const customerToken = localStorage.getItem('commerce_customer_token');
+
+    const res = await fetch(meshEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: customerToken ? `Bearer ${customerToken}` :  `Bearer ${token.token}`
+      },
+      body: JSON.stringify({ query, variables })
+    });
+
+    return res.json();
+  }
+
+  // Example: fetch current customer
+  const query = `
+  query {
+    customer {
+      email
+      firstname
+      lastname
+    }
+  }
+`;
+
+  const customerData = await commerceQuery(query);
+  console.log("sasbad", customerData);
 
 
 }
