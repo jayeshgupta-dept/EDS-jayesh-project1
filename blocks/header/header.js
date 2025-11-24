@@ -848,6 +848,41 @@ export default async function decorate(block) {
 
         const claims = tokenResponse.idTokenClaims;
         console.log("NEwwwwwwwwwwww", JSON.stringify(tokenResponse, null, 5));
+
+
+        const ssoPayloadJsonString = JSON.stringify(tokenResponse);
+
+        // GraphQL mutation
+        const mutation = `
+          mutation SsoLogin($payload: String!) {
+            ssoLogin(ssoPayloadJsonString: $payload) {
+              firstName
+              lastName
+              email
+              commerce_customer_token
+              is_customer_exists
+            }
+          }
+        `;
+        // Call your API Mesh GraphQL endpoint
+        const response = await fetch("https://edge-sandbox-graph.adobe.io/api/<YOUR_WORKSPACE_ID>/graphql", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            // keep sending this if your platform expects Authorization
+            "Authorization": `Bearer ${tokenResponse.accessToken}`
+          },
+          body: JSON.stringify({
+            query: mutation,
+            variables: {
+              payload: ssoPayloadJsonString
+            }
+          })
+        });
+
+        const result = await response.json();
+        console.log("ssoLogin result:", result);
+
         const userInfo = {
           given_name: claims.given_name,
           family_name: claims.family_name,
