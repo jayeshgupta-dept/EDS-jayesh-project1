@@ -845,43 +845,54 @@ export default async function decorate(block) {
           scopes: ["openid", "profile", "email"],
           account
         });
-
         const claims = tokenResponse.idTokenClaims;
         console.log("NEwwwwwwwwwwww", JSON.stringify(tokenResponse, null, 5));
 
-
         const ssoPayloadJsonString = JSON.stringify(tokenResponse);
+
+        // 🔹 Derive email from claims
+        const email =
+          claims.preferred_username ||
+          claims.email ||
+          tokenResponse.account?.username ||
+          "";
 
         // GraphQL mutation
         const mutation = `
-          mutation SsoLogin($payload: String!) {
-            ssoLogin(ssoPayloadJsonString: $payload) {
-              firstName
-              lastName
-              email
-              commerce_customer_token
-              is_customer_exists
-            }
-          }
-        `;
+  mutation SsoLogin($payload: String!, $email: String!) {
+    ssoLogin(ssoPayloadJsonString: $payload, email: $email) {
+      firstName
+      lastName
+      email
+      commerce_customer_token
+      is_customer_exists
+    }
+  }
+`;
+
         // Call your API Mesh GraphQL endpoint
-        const response = await fetch("https://edge-sandbox-graph.adobe.io/api/d79af252-509e-4a97-b99c-824f0a08c271/graphql", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            // keep sending this if your platform expects Authorization
-            "Authorization": `Bearer ${tokenResponse.accessToken}`
-          },
-          body: JSON.stringify({
-            query: mutation,
-            variables: {
-              payload: ssoPayloadJsonString
-            }
-          })
-        });
+        const response = await fetch(
+          "https://edge-sandbox-graph.adobe.io/api/d79af252-509e-4a97-b99c-824f0a08c271/graphql",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              // if you really don't want this, remove it later, but it's not related to the current error
+              "Authorization": `Bearer ${tokenResponse.accessToken}`
+            },
+            body: JSON.stringify({
+              query: mutation,
+              variables: {
+                payload: ssoPayloadJsonString,
+                email // 🔹 pass email here
+              }
+            })
+          }
+        );
 
         const result = await response.json();
         console.log("ssoLogin result:", result);
+
 
         const userInfo = {
           given_name: claims.given_name,
