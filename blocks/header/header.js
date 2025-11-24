@@ -852,11 +852,11 @@ export default async function decorate(block) {
           family_name: claims.family_name,
           email: claims.email,
           oid: claims.oid,
-          idToken: tokenResponse.idToken.substring(0, 60) + "..."
+          idToken: tokenResponse.idToken
         };
 
         console.log(claims, "✅ Microsoft Login success:", userInfo);
-        console.log("ashysaybvsa", JSON.stringify(userInfo, null, 5));
+        console.log("ashysaybvsa", JSON.stringify(userInfo.idToken, null, 5));
         console.log(userInfo.idToken);
         console.log(String(userInfo.idToken));
         alert(`Welcome, ${userInfo}! You have successfully logged in.`);
