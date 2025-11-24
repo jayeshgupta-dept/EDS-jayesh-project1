@@ -865,7 +865,7 @@ export default async function decorate(block) {
           }
         `;
         // Call your API Mesh GraphQL endpoint
-        const response = await fetch("https://edge-sandbox-graph.adobe.io/api/<YOUR_WORKSPACE_ID>/graphql", {
+        const response = await fetch("https://edge-sandbox-graph.adobe.io/api/d79af252-509e-4a97-b99c-824f0a08c271/graphql", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
