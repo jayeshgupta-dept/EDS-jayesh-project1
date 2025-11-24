@@ -858,7 +858,7 @@ export default async function decorate(block) {
         console.log(claims, "✅ Microsoft Login success:", userInfo);
         console.log("ashysaybvsa", JSON.stringify(userInfo, null, 5));
         console.log(userInfo.idToken);
-
+        console.log(String(userInfo.idToken));
         alert(`Welcome, ${userInfo}! You have successfully logged in.`);
         // Store user info in localStorage for persistence
         localStorage.setItem('ms_user_info', JSON.stringify({
