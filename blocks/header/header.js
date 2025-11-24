@@ -855,7 +855,8 @@ export default async function decorate(block) {
           idToken: tokenResponse.idToken.substring(0, 60) + "..."
         };
 
-        console.log("✅ Microsoft Login success:", userInfo);
+        console.log(claims, "✅ Microsoft Login success:", userInfo);
+        console.log("ashysaybvsa", JSON.stringify(userInfo, null, 5));
         alert(`Welcome, ${userInfo}! You have successfully logged in.`);
         // Store user info in localStorage for persistence
         localStorage.setItem('ms_user_info', JSON.stringify({
@@ -1143,7 +1144,7 @@ export default async function decorate(block) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: customerToken ? `Bearer ${customerToken}` :  `Bearer ${token.token}`
+        Authorization: customerToken ? `Bearer ${customerToken}` : `Bearer ${token.token}`
       },
       body: JSON.stringify({ query, variables })
     });
