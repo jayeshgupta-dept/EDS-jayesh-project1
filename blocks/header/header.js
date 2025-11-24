@@ -847,6 +847,7 @@ export default async function decorate(block) {
         });
 
         const claims = tokenResponse.idTokenClaims;
+        console.log("NEwwwwwwwwwwww", JSON.stringify(claims, null, 5));
         const userInfo = {
           given_name: claims.given_name,
           family_name: claims.family_name,
